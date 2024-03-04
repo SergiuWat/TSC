@@ -1,0 +1,9 @@
+10^-3 mini
+10^-6 micro
+10^-9 nano
+
+frecventa: 1/perioada
+
+factor de umplere: palier pozitiv/T * 100
+
+sv trunchiaza si taie msb si avem o alta valoare de exemplu daca aveam 0-63 dupa trunchiere avem 0-31
