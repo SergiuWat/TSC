@@ -13,14 +13,19 @@ module instr_register_test
    output operand_t      operand_a,
    output operand_t      operand_b,
    output opcode_t       opcode,
+   output operand_d      rezultat,
    output address_t      write_pointer,
    output address_t      read_pointer,
    input  instruction_t  instruction_word
   );
 
-  timeunit 1ns/1ns;
+  timeunit 1ns/1ns; // pentru "#" sa seteam unitatile de timp
 
   int seed = 555;
+  int errors = 0;
+  parameter WR_NR = 20;
+  parameter RD_NR = 20;
+
 
   initial begin
     $display("\n\n***********************************************************");
@@ -39,7 +44,8 @@ module instr_register_test
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
-    repeat (3) begin
+    //repeat (3) begin modificat de sergiu
+    repeat(RD_NR) begin
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
     end
@@ -47,12 +53,13 @@ module instr_register_test
 
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    for (int i=0; i<=2; i++) begin
+    for (int i=0; i<=WR_NR; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
+      // de facut functia check_result() nu cea pe care o am deja alta noua
     end
 
     @(posedge clk) ;
@@ -84,6 +91,7 @@ module instr_register_test
     $display("  opcode = %0d (%s)", opcode, opcode.name);
     $display("  operand_a = %0d",   operand_a);
     $display("  operand_b = %0d\n", operand_b);
+    $display("  rezultat = %0d\n", rezultat);
   endfunction: print_transaction
 
   function void print_results;
@@ -91,6 +99,35 @@ module instr_register_test
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
     $display("  operand_a = %0d",   instruction_word.op_a);
     $display("  operand_b = %0d\n", instruction_word.op_b);
+    $display("  rezulat = %0d\n", instruction_word.rezultat);
   endfunction: print_results
+
+  function void check_result();
+   
+    operand_d expected_result [0:31];
+    instruction_t actual_results [0:31];
+    foreach(actual_results[read_pointer])begin
+      case(actual_results[read_pointer].opc)
+            PASSA: expected_result[read_pointer] = actual_results[read_pointer].op_a;
+
+            PASSB: expected_result[read_pointer] = actual_results[read_pointer].op_b;
+
+            ADD: expected_result[read_pointer] = actual_results[read_pointer].op_a + actual_results[read_pointer].op_b;
+
+            SUB: expected_result[read_pointer] = actual_results[read_pointer].op_a - actual_results[read_pointer].op_b;
+
+            MULT: expected_result[read_pointer] = actual_results[read_pointer].op_a * actual_results[read_pointer].op_b;
+
+            DIV: expected_result[read_pointer] = actual_results[read_pointer].op_a / actual_results[read_pointer].op_b;
+            MOD: expected_result[read_pointer] = actual_results[read_pointer].op_a % actual_results[read_pointer].op_b;
+
+            ZERO: expected_result[read_pointer] = 'b0;
+      endcase
+        if(expected_result[read_pointer] != actual_results[read_pointer].rezultat)begin
+          errors++;
+          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n",read_pointer , actual_results[read_pointer].opc, actual_results[read_pointer].opc.name, actual_results[read_pointer].op_a, actual_results[read_pointer].op_b, expected_result[read_pointer],actual_results[read_pointer].rezultat);
+        end
+    end
+  endfunction: check_result
 
 endmodule: instr_register_test
