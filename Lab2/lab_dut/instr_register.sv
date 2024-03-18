@@ -14,7 +14,6 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
  input  operand_t      operand_a,
  input  operand_t      operand_b,
  input  opcode_t       opcode,
- input  operand_d      rezultat,
  input  address_t      write_pointer,
  input  address_t      read_pointer,
  output instruction_t  instruction_word
@@ -36,29 +35,29 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
 
       PASSB: iw_reg[write_pointer] = '{opcode,operand_a,operand_b, operand_b};
 
-      ADD: iw_reg[write_pointer] = '{ADD, operand_a, operand_b, operand_a + operand_b};
+      ADD: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a + operand_b};
 
-      SUB: iw_reg[write_pointer] = '{SUB, operand_a, operand_b, operand_a - operand_b};
+      SUB: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a - operand_b};
 
-      MULT: iw_reg[write_pointer] = '{MULT, operand_a, operand_b, operand_a * operand_b};
+      MULT: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a * operand_b};
 
       DIV:
         if(operand_b == 'b0)begin
-          iw_reg[write_pointer] = '{DIV, operand_a, operand_b, 'b0};
+          iw_reg[write_pointer] = '{opcode, operand_a, operand_b, 'b0};
         end 
         else begin
-           iw_reg[write_pointer] = '{DIV, operand_a, operand_b, operand_a / operand_b};
+           iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a / operand_b};
         end
-      MOD: iw_reg[write_pointer] = '{MOD, operand_a, operand_b, operand_a % operand_b};
+      MOD: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a % operand_b};
 
-      ZERO  : iw_reg[write_pointer] = '{opc:ZERO, default:0}; // Set default to zero if opcode is not recognized
+      ZERO  : iw_reg[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}};
+      
+      default: iw_reg[write_pointer] = '{opc:ZERO,default:0}; // Set default to zero if opcode is not recognized
       endcase
     end
 
-  // read from the register
-  always@(posedge clk, negedge reset_n)   
-   	   instruction_word <= iw_reg[read_pointer];
-  //assign instruction_word = iw_reg[read_pointer];  // continuously read from register
+  // // read from the register
+  assign instruction_word = iw_reg[read_pointer];  // continuously read from register
 
 // compile with +define+FORCE_LOAD_ERROR to inject a functional bug for verification to catch
 `ifdef FORCE_LOAD_ERROR

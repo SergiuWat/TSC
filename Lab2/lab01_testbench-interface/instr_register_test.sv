@@ -13,7 +13,6 @@ module instr_register_test
    output operand_t      operand_a,
    output operand_t      operand_b,
    output opcode_t       opcode,
-   output operand_d      rezultat,
    output address_t      write_pointer,
    output address_t      read_pointer,
    input  instruction_t  instruction_word
@@ -25,6 +24,9 @@ module instr_register_test
   int errors = 0;
   parameter WR_NR = 20;
   parameter RD_NR = 20;
+  operand_d expected_result;
+  instruction_t iw_reg_test [0:31];
+  
 
 
   initial begin
@@ -48,9 +50,10 @@ module instr_register_test
     repeat(RD_NR) begin
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
+      save_test_data;
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
-
+     $display("Errors: %0d: ", errors);
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
     for (int i=0; i<=WR_NR; i++) begin
@@ -59,19 +62,20 @@ module instr_register_test
       // the expected values to be read back
       @(posedge clk) read_pointer = i;
       @(negedge clk) print_results;
+      check_result;
       // de facut functia check_result() nu cea pe care o am deja alta noua
     end
 
     @(posedge clk) ;
     $display("\n***********************************************************");
-    $display(  "***  THIS IS NOT A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
-    $display(  "***  NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
+    $display(  "***  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
+    $display(  "***  DON'T NEED TO VISUALLY VERIFY THAT THE OUTPUT VALUES     ***");
     $display(  "***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***");
     $display(  "***********************************************************\n");
     $finish;
   end
 
-  function void randomize_transaction;
+  function void randomize_transaction; // genereaza operand_a si operand_b
     // A later lab will replace this function with SystemVerilog
     // constrained random values
     //
@@ -91,7 +95,6 @@ module instr_register_test
     $display("  opcode = %0d (%s)", opcode, opcode.name);
     $display("  operand_a = %0d",   operand_a);
     $display("  operand_b = %0d\n", operand_b);
-    $display("  rezultat = %0d\n", rezultat);
   endfunction: print_transaction
 
   function void print_results;
@@ -102,32 +105,47 @@ module instr_register_test
     $display("  rezulat = %0d\n", instruction_word.rezultat);
   endfunction: print_results
 
+  function void save_test_data();
+    case(opcode)
+    PASSA: expected_result = operand_a;
+    PASSB: expected_result = operand_b;
+    ADD: expected_result = operand_a + operand_b;
+    SUB: expected_result = operand_a - operand_b;
+    MOD: expected_result = operand_a % operand_b;
+    MULT: expected_result = operand_a * operand_b;
+    DIV:  expected_result = operand_a / operand_b;
+    ZERO: expected_result = 'b0;
+  endcase
+  iw_reg_test[write_pointer] = '{opcode, operand_a , operand_b, expected_result};
+  
+  if(iw_reg_test[write_pointer].rezultat != expected_result)begin
+    errors++;  
+  end
+  endfunction: save_test_data
+
   function void check_result();
-   
-    operand_d expected_result [0:31];
-    instruction_t actual_results [0:31];
-    foreach(actual_results[read_pointer])begin
-      case(actual_results[read_pointer].opc)
-            PASSA: expected_result[read_pointer] = actual_results[read_pointer].op_a;
+      //  foreach(iw_reg_test[read_pointer])begin
+      case(iw_reg_test[read_pointer].opc)
+            PASSA: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a;
 
-            PASSB: expected_result[read_pointer] = actual_results[read_pointer].op_b;
+            PASSB: expected_result[read_pointer] = iw_reg_test[read_pointer].op_b;
 
-            ADD: expected_result[read_pointer] = actual_results[read_pointer].op_a + actual_results[read_pointer].op_b;
+            ADD: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a + iw_reg_test[read_pointer].op_b;
 
-            SUB: expected_result[read_pointer] = actual_results[read_pointer].op_a - actual_results[read_pointer].op_b;
+            SUB: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a - iw_reg_test[read_pointer].op_b;
 
-            MULT: expected_result[read_pointer] = actual_results[read_pointer].op_a * actual_results[read_pointer].op_b;
+            MULT: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a * iw_reg_test[read_pointer].op_b;
 
-            DIV: expected_result[read_pointer] = actual_results[read_pointer].op_a / actual_results[read_pointer].op_b;
-            MOD: expected_result[read_pointer] = actual_results[read_pointer].op_a % actual_results[read_pointer].op_b;
+            DIV: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;
+            MOD: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
 
             ZERO: expected_result[read_pointer] = 'b0;
       endcase
-        if(expected_result[read_pointer] != actual_results[read_pointer].rezultat)begin
+        if(expected_result[read_pointer] != iw_reg_test[read_pointer].rezultat)begin
           errors++;
-          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n",read_pointer , actual_results[read_pointer].opc, actual_results[read_pointer].opc.name, actual_results[read_pointer].op_a, actual_results[read_pointer].op_b, expected_result[read_pointer],actual_results[read_pointer].rezultat);
+          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n",read_pointer , iw_reg_test[read_pointer].opc, iw_reg_test[read_pointer].opc.name, iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, expected_result[read_pointer],iw_reg_test[read_pointer].rezultat);
         end
-    end
+    //end
   endfunction: check_result
 
 endmodule: instr_register_test

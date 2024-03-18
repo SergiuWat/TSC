@@ -17,7 +17,6 @@ module top;
   logic          reset_n;
   opcode_t       opcode; // acel _t vine de la template
   operand_t      operand_a, operand_b;
-  operand_d      rezultat;
   address_t      write_pointer, read_pointer;
   instruction_t  instruction_word;
 
@@ -29,7 +28,6 @@ module top;
     .operand_a(operand_a),
     .operand_b(operand_b),
     .opcode(opcode),
-    .rezultat(rezultat),
     .write_pointer(write_pointer),
     .read_pointer(read_pointer),
     .instruction_word(instruction_word)
@@ -43,7 +41,6 @@ module top;
     .operand_a(operand_a),
     .operand_b(operand_b),
     .opcode(opcode),
-    .rezultat(rezultat),
     .write_pointer(write_pointer),
     .read_pointer(read_pointer),
     .instruction_word(instruction_word)
