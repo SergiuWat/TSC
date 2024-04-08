@@ -9,6 +9,10 @@ add wave -noupdate /top/test/opcode
 add wave -noupdate /top/test/write_pointer
 add wave -noupdate /top/test/read_pointer
 add wave -noupdate /top/test/instruction_word
+add wave -noupdate /top/test/write_order
+add wave -noupdate /top/test/read_order
+add wave -noupdate /top/test/WR_NR
+add wave -noupdate /top/test/RD_NR
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {5 ns} 0}
 quietly wave cursor active 1
@@ -26,4 +30,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {195 ns}
+WaveRestoreZoom {561 ns} {756 ns}

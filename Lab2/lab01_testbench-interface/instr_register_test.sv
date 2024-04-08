@@ -25,6 +25,7 @@ module instr_register_test
   parameter read_order = 1;
   parameter WR_NR = 7;
   parameter RD_NR = 7;
+  parameter CASE_NAME;
   operand_d expected_result;
   int fail_counter = 0;
   int passed_counter = 0;
@@ -138,6 +139,8 @@ module instr_register_test
     $display("\n Failed test: %0d", fail_counter);
     $display("\n Passed test: %0d", passed_counter);
     $display("\n Passed test %0d out of %0d", passed_counter, WR_NR + 1);
+    // va trebui sa am un fopen(../report/..)
+    //
   endfunction
   function void check_result;
       //  foreach(iw_reg_test[read_pointer])begin

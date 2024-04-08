@@ -7,3 +7,17 @@ frecventa: 1/perioada
 factor de umplere: palier pozitiv/T * 100
 
 sv trunchiaza si taie msb si avem o alta valoare de exemplu daca aveam 0-63 dupa trunchiere avem 0-31
+
+
+
+pentru help ese "/?"
+
+intreabre examen cum salvezi formele de unda? File -> save formate ->
+
+sim - se sterge la fiecare rulare
+
+in run_test se pune %6 dar in run.do voi avea $5 pentru ca %5 din run_test nu se duce in run.do 
+bitul de semn va fi 63
+
+display in test
+de dat display la semnul de bit
