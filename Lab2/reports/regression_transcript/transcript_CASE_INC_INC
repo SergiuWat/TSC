@@ -1,6 +1,6 @@
 # 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5c Compiler 2017.01 Jan 23 2017
-# Start time: 09:22:51 on Apr 08,2024
+# Start time: 15:14:49 on Apr 14,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
@@ -10,10 +10,10 @@
 # 
 # Top level modules:
 # 	top
-# End time: 09:22:51 on Apr 08,2024, Elapsed time: 0:00:00
+# End time: 15:14:50 on Apr 14,2024, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
-# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GWR_NR=50 -GRD_NR=20 -Gwrite_order=0 -Gread_order=0 
-# Start time: 09:22:51 on Apr 08,2024
+# vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GCASE_NAME=CASE_INC_INC -GWR_NR=50 -GRD_NR=20 -Gwrite_order=0 -Gread_order=0 
+# Start time: 15:14:50 on Apr 14,2024
 # 
 # 
 # ***********************************************************
@@ -125,277 +125,283 @@
 #   operand_a = -13
 #   operand_b = 8
 # 
+# Writing to register location 20: 
+#   opcode = 1 (PASSA)
+#   operand_a = -8
+#   operand_b = 12
+# 
+# Writing to register location 21: 
+#   opcode = 1 (PASSA)
+#   operand_a = -4
+#   operand_b = 1
+# 
+# Writing to register location 22: 
+#   opcode = 1 (PASSA)
+#   operand_a = -15
+#   operand_b = 1
+# 
+# Writing to register location 23: 
+#   opcode = 7 (MOD)
+#   operand_a = 1
+#   operand_b = 1
+# 
+# Writing to register location 24: 
+#   opcode = 5 (MULT)
+#   operand_a = 1
+#   operand_b = 15
+# 
+# Writing to register location 25: 
+#   opcode = 7 (MOD)
+#   operand_a = -1
+#   operand_b = 5
+# 
+# Writing to register location 26: 
+#   opcode = 4 (SUB)
+#   operand_a = 5
+#   operand_b = 7
+# 
+# Writing to register location 27: 
+#   opcode = 4 (SUB)
+#   operand_a = -9
+#   operand_b = 4
+# 
+# Writing to register location 28: 
+#   opcode = 5 (MULT)
+#   operand_a = 4
+#   operand_b = 12
+# 
+# Writing to register location 29: 
+#   opcode = 3 (ADD)
+#   operand_a = 12
+#   operand_b = 5
+# 
+# Writing to register location 30: 
+#   opcode = 4 (SUB)
+#   operand_a = -11
+#   operand_b = 11
+# 
+# Writing to register location 31: 
+#   opcode = 0 (ZERO)
+#   operand_a = 11
+#   operand_b = 12
+# 
+# Writing to register location 0: 
+#   opcode = 2 (PASSB)
+#   operand_a = -4
+#   operand_b = 8
+# 
+# Writing to register location 1: 
+#   opcode = 2 (PASSB)
+#   operand_a = 8
+#   operand_b = 10
+# 
+# Writing to register location 2: 
+#   opcode = 6 (DIV)
+#   operand_a = -6
+#   operand_b = 2
+# 
+# Writing to register location 3: 
+#   opcode = 1 (PASSA)
+#   operand_a = 2
+#   operand_b = 14
+# 
+# Writing to register location 4: 
+#   opcode = 4 (SUB)
+#   operand_a = 14
+#   operand_b = 9
+# 
+# Writing to register location 5: 
+#   opcode = 7 (MOD)
+#   operand_a = -7
+#   operand_b = 12
+# 
+# Writing to register location 6: 
+#   opcode = 1 (PASSA)
+#   operand_a = 12
+#   operand_b = 7
+# 
+# Writing to register location 7: 
+#   opcode = 5 (MULT)
+#   operand_a = -9
+#   operand_b = 1
+# 
+# Writing to register location 8: 
+#   opcode = 6 (DIV)
+#   operand_a = -15
+#   operand_b = 13
+# 
+# Writing to register location 9: 
+#   opcode = 3 (ADD)
+#   operand_a = -3
+#   operand_b = 6
+# 
+# Writing to register location 10: 
+#   opcode = 3 (ADD)
+#   operand_a = 6
+#   operand_b = 3
+# 
+# Writing to register location 11: 
+#   opcode = 1 (PASSA)
+#   operand_a = -13
+#   operand_b = 11
+# 
+# Writing to register location 12: 
+#   opcode = 7 (MOD)
+#   operand_a = 11
+#   operand_b = 1
+# 
+# Writing to register location 13: 
+#   opcode = 5 (MULT)
+#   operand_a = -15
+#   operand_b = 15
+# 
+# Writing to register location 14: 
+#   opcode = 1 (PASSA)
+#   operand_a = 15
+#   operand_b = 13
+# 
+# Writing to register location 15: 
+#   opcode = 7 (MOD)
+#   operand_a = -3
+#   operand_b = 1
+# 
+# Writing to register location 16: 
+#   opcode = 0 (ZERO)
+#   operand_a = 1
+#   operand_b = 15
+# 
+# Writing to register location 17: 
+#   opcode = 6 (DIV)
+#   operand_a = 15
+#   operand_b = 0
+# 
 # 
 # Reading back the same register locations written...
 # Read from register location 0: 
-#   opcode = 1 (PASSA)
-#   operand_a = -12
-#   operand_b = 7
+#   opcode = 2 (PASSB)
+#   operand_a = -4
+#   operand_b = 8
 # 
-#   rezulat = -12
-# 
-# 
-#  Iteration = 0 
-# : opcode = 1 (PASSA)  
-# operand_a = -12 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = -12 
+#   rezulat = 8
 # 
 # Read from register location 1: 
-#   opcode = 0 (ZERO)
+#   opcode = 2 (PASSB)
+#   operand_a = 8
+#   operand_b = 10
+# 
+#   rezulat = 10
+# 
+# Read from register location 2: 
+#   opcode = 6 (DIV)
+#   operand_a = -6
+#   operand_b = 2
+# 
+#   rezulat = -3
+# 
+# Read from register location 3: 
+#   opcode = 1 (PASSA)
+#   operand_a = 2
+#   operand_b = 14
+# 
+#   rezulat = 2
+# 
+# Read from register location 4: 
+#   opcode = 4 (SUB)
+#   operand_a = 14
+#   operand_b = 9
+# 
+#   rezulat = 5
+# 
+# Read from register location 5: 
+#   opcode = 7 (MOD)
+#   operand_a = -7
+#   operand_b = 12
+# 
+#   rezulat = -7
+# 
+# Read from register location 6: 
+#   opcode = 1 (PASSA)
+#   operand_a = 12
+#   operand_b = 7
+# 
+#   rezulat = 12
+# 
+# Read from register location 7: 
+#   opcode = 5 (MULT)
 #   operand_a = -9
+#   operand_b = 1
+# 
+#   rezulat = -9
+# 
+# Read from register location 8: 
+#   opcode = 6 (DIV)
+#   operand_a = -15
+#   operand_b = 13
+# 
+#   rezulat = -1
+# 
+# Read from register location 9: 
+#   opcode = 3 (ADD)
+#   operand_a = -3
+#   operand_b = 6
+# 
+#   rezulat = 3
+# 
+# Read from register location 10: 
+#   opcode = 3 (ADD)
+#   operand_a = 6
+#   operand_b = 3
+# 
+#   rezulat = 9
+# 
+# Read from register location 11: 
+#   opcode = 1 (PASSA)
+#   operand_a = -13
+#   operand_b = 11
+# 
+#   rezulat = -13
+# 
+# Read from register location 12: 
+#   opcode = 7 (MOD)
+#   operand_a = 11
 #   operand_b = 1
 # 
 #   rezulat = 0
 # 
-# 
-#  Iteration = 1 
-# : opcode = 0 (ZERO)  
-# operand_a = -9 
-#  operand_b = 1 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 2: 
-#   opcode = 7 (MOD)
-#   operand_a = -15
-#   operand_b = 8
-# 
-#   rezulat = -7
-# 
-# 
-#  Iteration = 2 
-# : opcode = 7 (MOD)  
-# operand_a = -15 
-#  operand_b = 8 
-#  expected result = 0  
-#  actual result = -7 
-# 
-# Read from register location 3: 
+# Read from register location 13: 
 #   opcode = 5 (MULT)
-#   operand_a = -8
-#   operand_b = 7
+#   operand_a = -15
+#   operand_b = 15
 # 
-#   rezulat = -56
+#   rezulat = -225
 # 
-# 
-#  Iteration = 3 
-# : opcode = 5 (MULT)  
-# operand_a = -8 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = -56 
-# 
-# Read from register location 4: 
-#   opcode = 3 (ADD)
-#   operand_a = -9
-#   operand_b = 5
-# 
-#   rezulat = -4
-# 
-# 
-#  Iteration = 4 
-# : opcode = 3 (ADD)  
-# operand_a = -9 
-#  operand_b = 5 
-#  expected result = 0  
-#  actual result = -4 
-# 
-# Read from register location 5: 
-#   opcode = 4 (SUB)
-#   operand_a = 5
-#   operand_b = 3
-# 
-#   rezulat = 2
-# 
-# 
-#  Iteration = 5 
-# : opcode = 4 (SUB)  
-# operand_a = 5 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 2 
-# 
-# Read from register location 6: 
-#   opcode = 3 (ADD)
-#   operand_a = 3
-#   operand_b = 12
+# Read from register location 14: 
+#   opcode = 1 (PASSA)
+#   operand_a = 15
+#   operand_b = 13
 # 
 #   rezulat = 15
 # 
-# 
-#  Iteration = 6 
-# : opcode = 3 (ADD)  
-# operand_a = 3 
-#  operand_b = 12 
-#  expected result = 1  
-#  actual result = 15 
-# 
-# Read from register location 7: 
-#   opcode = 6 (DIV)
-#   operand_a = 12
-#   operand_b = 3
-# 
-#   rezulat = 4
-# 
-# 
-#  Iteration = 7 
-# : opcode = 6 (DIV)  
-# operand_a = 12 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 4 
-# 
-# Read from register location 8: 
-#   opcode = 1 (PASSA)
-#   operand_a = 3
-#   operand_b = 14
-# 
-#   rezulat = 3
-# 
-# 
-#  Iteration = 8 
-# : opcode = 1 (PASSA)  
-# operand_a = 3 
-#  operand_b = 14 
-#  expected result = 1  
-#  actual result = 3 
-# 
-# Read from register location 9: 
-#   opcode = 1 (PASSA)
-#   operand_a = -2
-#   operand_b = 9
-# 
-#   rezulat = -2
-# 
-# 
-#  Iteration = 9 
-# : opcode = 1 (PASSA)  
-# operand_a = -2 
-#  operand_b = 9 
-#  expected result = 1  
-#  actual result = -2 
-# 
-# Read from register location 10: 
+# Read from register location 15: 
 #   opcode = 7 (MOD)
-#   operand_a = 9
-#   operand_b = 9
+#   operand_a = -3
+#   operand_b = 1
 # 
 #   rezulat = 0
 # 
-# 
-#  Iteration = 10 
-# : opcode = 7 (MOD)  
-# operand_a = 9 
-#  operand_b = 9 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 11: 
-#   opcode = 3 (ADD)
-#   operand_a = 9
-#   operand_b = 7
-# 
-#   rezulat = 16
-# 
-# 
-#  Iteration = 11 
-# : opcode = 3 (ADD)  
-# operand_a = 9 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = 16 
-# 
-# Read from register location 12: 
-#   opcode = 5 (MULT)
-#   operand_a = 7
-#   operand_b = 3
-# 
-#   rezulat = 21
-# 
-# 
-#  Iteration = 12 
-# : opcode = 5 (MULT)  
-# operand_a = 7 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 21 
-# 
-# Read from register location 13: 
-#   opcode = 7 (MOD)
-#   operand_a = 3
-#   operand_b = 5
-# 
-#   rezulat = 3
-# 
-# 
-#  Iteration = 13 
-# : opcode = 7 (MOD)  
-# operand_a = 3 
-#  operand_b = 5 
-#  expected result = 1  
-#  actual result = 3 
-# 
-# Read from register location 14: 
+# Read from register location 16: 
 #   opcode = 0 (ZERO)
-#   operand_a = -11
+#   operand_a = 1
 #   operand_b = 15
 # 
 #   rezulat = 0
 # 
-# 
-#  Iteration = 14 
-# : opcode = 0 (ZERO)  
-# operand_a = -11 
-#  operand_b = 15 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 15: 
+# Read from register location 17: 
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
 # 
 #   rezulat = 0
-# 
-# 
-#  Iteration = 15 
-# : opcode = 6 (DIV)  
-# operand_a = 15 
-#  operand_b = 0 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 16: 
-#   opcode = 4 (SUB)
-#   operand_a = 0
-#   operand_b = 14
-# 
-#   rezulat = -14
-# 
-# 
-#  Iteration = 16 
-# : opcode = 4 (SUB)  
-# operand_a = 0 
-#  operand_b = 14 
-#  expected result = 1  
-#  actual result = -14 
-# 
-# Read from register location 17: 
-#   opcode = 3 (ADD)
-#   operand_a = -2
-#   operand_b = 4
-# 
-#   rezulat = 2
-# 
-# 
-#  Iteration = 17 
-# : opcode = 3 (ADD)  
-# operand_a = -2 
-#  operand_b = 4 
-#  expected result = 1  
-#  actual result = 2 
 # 
 # Read from register location 18: 
 #   opcode = 0 (ZERO)
@@ -403,14 +409,6 @@
 #   operand_b = 3
 # 
 #   rezulat = 0
-# 
-# 
-#  Iteration = 18 
-# : opcode = 0 (ZERO)  
-# operand_a = -12 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 0 
 # 
 # Read from register location 19: 
 #   opcode = 4 (SUB)
@@ -419,485 +417,20 @@
 # 
 #   rezulat = -21
 # 
-# 
-#  Iteration = 19 
-# : opcode = 4 (SUB)  
-# operand_a = -13 
-#  operand_b = 8 
-#  expected result = 1  
-#  actual result = -21 
-# 
 # Read from register location 20: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 20 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 21: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 21 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 22: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 22 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 23: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 23 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 24: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 24 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 25: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 25 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 26: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 26 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 27: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 27 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 28: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 28 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 29: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 29 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 30: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 30 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 31: 
-#   opcode = 0 (ZERO)
-#   operand_a = 0
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 31 
-# : opcode = x ()  
-# operand_a = x 
-#  operand_b = x 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 0: 
 #   opcode = 1 (PASSA)
-#   operand_a = -12
-#   operand_b = 7
-# 
-#   rezulat = -12
-# 
-# 
-#  Iteration = 0 
-# : opcode = 1 (PASSA)  
-# operand_a = -12 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = -12 
-# 
-# Read from register location 1: 
-#   opcode = 0 (ZERO)
-#   operand_a = -9
-#   operand_b = 1
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 1 
-# : opcode = 0 (ZERO)  
-# operand_a = -9 
-#  operand_b = 1 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 2: 
-#   opcode = 7 (MOD)
-#   operand_a = -15
-#   operand_b = 8
-# 
-#   rezulat = -7
-# 
-# 
-#  Iteration = 2 
-# : opcode = 7 (MOD)  
-# operand_a = -15 
-#  operand_b = 8 
-#  expected result = 0  
-#  actual result = -7 
-# 
-# Read from register location 3: 
-#   opcode = 5 (MULT)
 #   operand_a = -8
-#   operand_b = 7
-# 
-#   rezulat = -56
-# 
-# 
-#  Iteration = 3 
-# : opcode = 5 (MULT)  
-# operand_a = -8 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = -56 
-# 
-# Read from register location 4: 
-#   opcode = 3 (ADD)
-#   operand_a = -9
-#   operand_b = 5
-# 
-#   rezulat = -4
-# 
-# 
-#  Iteration = 4 
-# : opcode = 3 (ADD)  
-# operand_a = -9 
-#  operand_b = 5 
-#  expected result = 0  
-#  actual result = -4 
-# 
-# Read from register location 5: 
-#   opcode = 4 (SUB)
-#   operand_a = 5
-#   operand_b = 3
-# 
-#   rezulat = 2
-# 
-# 
-#  Iteration = 5 
-# : opcode = 4 (SUB)  
-# operand_a = 5 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 2 
-# 
-# Read from register location 6: 
-#   opcode = 3 (ADD)
-#   operand_a = 3
 #   operand_b = 12
 # 
-#   rezulat = 15
+#   rezulat = -8
 # 
 # 
-#  Iteration = 6 
-# : opcode = 3 (ADD)  
-# operand_a = 3 
-#  operand_b = 12 
-#  expected result = 1  
-#  actual result = 15 
+#  Failed test: 0
 # 
-# Read from register location 7: 
-#   opcode = 6 (DIV)
-#   operand_a = 12
-#   operand_b = 3
+#  Passed test: 21
 # 
-#   rezulat = 4
-# 
-# 
-#  Iteration = 7 
-# : opcode = 6 (DIV)  
-# operand_a = 12 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 4 
-# 
-# Read from register location 8: 
-#   opcode = 1 (PASSA)
-#   operand_a = 3
-#   operand_b = 14
-# 
-#   rezulat = 3
-# 
-# 
-#  Iteration = 8 
-# : opcode = 1 (PASSA)  
-# operand_a = 3 
-#  operand_b = 14 
-#  expected result = 1  
-#  actual result = 3 
-# 
-# Read from register location 9: 
-#   opcode = 1 (PASSA)
-#   operand_a = -2
-#   operand_b = 9
-# 
-#   rezulat = -2
-# 
-# 
-#  Iteration = 9 
-# : opcode = 1 (PASSA)  
-# operand_a = -2 
-#  operand_b = 9 
-#  expected result = 1  
-#  actual result = -2 
-# 
-# Read from register location 10: 
-#   opcode = 7 (MOD)
-#   operand_a = 9
-#   operand_b = 9
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 10 
-# : opcode = 7 (MOD)  
-# operand_a = 9 
-#  operand_b = 9 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 11: 
-#   opcode = 3 (ADD)
-#   operand_a = 9
-#   operand_b = 7
-# 
-#   rezulat = 16
-# 
-# 
-#  Iteration = 11 
-# : opcode = 3 (ADD)  
-# operand_a = 9 
-#  operand_b = 7 
-#  expected result = 1  
-#  actual result = 16 
-# 
-# Read from register location 12: 
-#   opcode = 5 (MULT)
-#   operand_a = 7
-#   operand_b = 3
-# 
-#   rezulat = 21
-# 
-# 
-#  Iteration = 12 
-# : opcode = 5 (MULT)  
-# operand_a = 7 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 21 
-# 
-# Read from register location 13: 
-#   opcode = 7 (MOD)
-#   operand_a = 3
-#   operand_b = 5
-# 
-#   rezulat = 3
-# 
-# 
-#  Iteration = 13 
-# : opcode = 7 (MOD)  
-# operand_a = 3 
-#  operand_b = 5 
-#  expected result = 1  
-#  actual result = 3 
-# 
-# Read from register location 14: 
-#   opcode = 0 (ZERO)
-#   operand_a = -11
-#   operand_b = 15
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 14 
-# : opcode = 0 (ZERO)  
-# operand_a = -11 
-#  operand_b = 15 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# Read from register location 15: 
-#   opcode = 6 (DIV)
-#   operand_a = 15
-#   operand_b = 0
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 15 
-# : opcode = 6 (DIV)  
-# operand_a = 15 
-#  operand_b = 0 
-#  expected result = 1  
-#  actual result = x 
-# 
-# Read from register location 16: 
-#   opcode = 4 (SUB)
-#   operand_a = 0
-#   operand_b = 14
-# 
-#   rezulat = -14
-# 
-# 
-#  Iteration = 16 
-# : opcode = 4 (SUB)  
-# operand_a = 0 
-#  operand_b = 14 
-#  expected result = 1  
-#  actual result = -14 
-# 
-# Read from register location 17: 
-#   opcode = 3 (ADD)
-#   operand_a = -2
-#   operand_b = 4
-# 
-#   rezulat = 2
-# 
-# 
-#  Iteration = 17 
-# : opcode = 3 (ADD)  
-# operand_a = -2 
-#  operand_b = 4 
-#  expected result = 1  
-#  actual result = 2 
-# 
-# Read from register location 18: 
-#   opcode = 0 (ZERO)
-#   operand_a = -12
-#   operand_b = 3
-# 
-#   rezulat = 0
-# 
-# 
-#  Iteration = 18 
-# : opcode = 0 (ZERO)  
-# operand_a = -12 
-#  operand_b = 3 
-#  expected result = 1  
-#  actual result = 0 
-# 
-# 
-#  Failed test: 51
-# 
-#  Passed test: 0
-# 
-#  Passed test 0 out of 51
+#  Passed test 21 out of 21
+# File openned successfully
 # 
 # ***********************************************************
 # ***  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  ***
@@ -905,7 +438,7 @@
 # ***  MATCH THE INPUT VALUES FOR EACH REGISTER LOCATION  ***
 # ***********************************************************
 # 
-# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(84)
+# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(91)
 #    Time: 746 ns  Iteration: 1  Instance: /top/test
-# End time: 09:22:51 on Apr 08,2024, Elapsed time: 0:00:00
+# End time: 15:14:50 on Apr 14,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0

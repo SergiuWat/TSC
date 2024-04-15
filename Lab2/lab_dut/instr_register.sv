@@ -40,7 +40,6 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
       SUB: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a - operand_b};
 
       MULT: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a * operand_b};
-
       DIV:
         if(operand_b == 'b0)begin
           iw_reg[write_pointer] = '{opcode, operand_a, operand_b, 'b0};
@@ -48,8 +47,13 @@ import instr_register_pkg::*;  // user-defined types are defined in instr_regist
         else begin
            iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a / operand_b};
         end
-      MOD: iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a % operand_b};
-
+      MOD:
+       if(operand_b == 'b0)begin
+          iw_reg[write_pointer] = '{opcode, operand_a, operand_b, 'b0};
+        end 
+        else begin
+           iw_reg[write_pointer] = '{opcode, operand_a, operand_b, operand_a % operand_b};
+        end         
       ZERO  : iw_reg[write_pointer] = '{opcode,operand_a,operand_b, {64{1'b0}}};
       
       default: iw_reg[write_pointer] = '{opc:ZERO,default:0}; // Set default to zero if opcode is not recognized

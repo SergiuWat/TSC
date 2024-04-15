@@ -21,3 +21,9 @@ bitul de semn va fi 63
 
 display in test
 de dat display la semnul de bit
+
+
+intrebare de examen: Cum adaug un operandul la putere 
+                     Sa afisam in test semnul rezultatului deci 63 si fac o variabila de tip bit care are 63 si scot semnul
+
+                     

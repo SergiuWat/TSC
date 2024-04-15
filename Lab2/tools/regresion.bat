@@ -1,8 +1,24 @@
-call run_test.bat 50 20 0 0 c CASE_INC_INC
-call run_test.bat 50 20 0 1 c CASE_INC_DEC
-call run_test.bat 50 20 1 1 c CASE_DEC_DEC  
-call run_test.bat 50 20 0 2 c CASE_INC_RANDOM
-call run_test.bat 50 20 2 0 c CASE_RANDOM_INC
-call run_test.bat 50 20 2 1 c CASE_RANDOM_DEC
-call run_test.bat 50 20 2 2 c CASE_RANDOM_RANDOM
-call run_test.bat 50 20 1 2 c CASE_DEC_RANDOM
+call run_test.bat 50 20 0 0 c CASE_RANDOM_RANDOM 57656788
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_1 57686874654
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_2 56857967546
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_3 65876986765
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_4 34654890435
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_5 97686788435
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_6 68657686345
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_7 86796745436
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_8 45756990684
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_9 56867900345
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_10 34565786345
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_11 98687577754
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_12 87987005345
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_13 98776856346
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_14 65867008235
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_15 56877006784
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_16 56746890654
+call run_test.bat 50 20 0 1 c CASE_RANDOM_RANDOM_17 56756900758
+::call run_test.bat 50 20 1 1 c CASE_DEC_DEC 666
+::call run_test.bat 50 20 0 2 c CASE_INC_RANDOM
+::call run_test.bat 50 20 2 0 c CASE_RANDOM_INC
+::call run_test.bat 50 20 2 1 c CASE_RANDOM_DEC
+::call run_test.bat 50 20 2 2 c CASE_RANDOM_RANDOM
+::call run_test.bat 50 20 1 2 c CASE_DEC_RANDOM

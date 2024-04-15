@@ -20,13 +20,16 @@ module instr_register_test
 
   timeunit 1ns/1ns; // pentru "#" sa seteam unitatile de timp
 
-  int seed = 555;
+
   parameter write_order = 1;  //0-incremental 1- decremental 2 - random
   parameter read_order = 1;
   parameter WR_NR = 7;
   parameter RD_NR = 7;
-  parameter CASE_NAME;
-  operand_d expected_result;
+  parameter CASE_NAME = "test";
+  parameter SEED_VAL = 555;
+ 
+  int seed = SEED_VAL;
+  int tests = 0;
   int fail_counter = 0;
   int passed_counter = 0;
   instruction_t iw_reg_test [0:31];
@@ -45,13 +48,18 @@ module instr_register_test
     read_pointer   = 5'h1F;         // initialize read pointer
     load_en        = 1'b0;          // initialize load control line
     reset_n       <= 1'b0;          // assert reset_n (active low)
+    foreach (iw_reg_test[i]) begin
+      iw_reg_test[i] = '{opc: ZERO, default: 0};
+    end
     repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles
     reset_n        = 1'b1;          // deassert reset_n (active low)
+
+
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
     //repeat (3) begin modificat de sergiu
-    repeat(RD_NR) begin
+    repeat(WR_NR) begin
       @(posedge clk) randomize_transaction;
       @(negedge clk) print_transaction;
       save_test_data;
@@ -60,7 +68,7 @@ module instr_register_test
 
     // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    for (int i=0; i<=WR_NR; i++) begin
+    for (int i=0; i<=RD_NR; i++) begin
       // later labs will replace this loop with iterating through a
       // scoreboard to determine which addresses were written and
       // the expected values to be read back
@@ -75,7 +83,7 @@ module instr_register_test
       // de facut functia check_result() nu cea pe care o am deja alta noua
     end
     final_report;
-
+    write_regression_status;
     @(posedge clk) ;
     $display("\n***********************************************************");
     $display(  "***  THIS IS A SELF-CHECKING TESTBENCH (YET).  YOU  ***");
@@ -101,7 +109,7 @@ module instr_register_test
     //write_pointer <= temp++;
     case(write_order)
       0: write_pointer <= temp_incremental++;
-      1: write_pointer <= temp_decremental--;
+      1: write_pointer <= temp_incremental--;
       2: write_pointer <= $unsigned($random)%32;
     endcase
   endfunction: randomize_transaction
@@ -122,14 +130,27 @@ module instr_register_test
   endfunction: print_results
 
   function void save_test_data;
+   operand_d expected_result;
     case(opcode)
     PASSA: expected_result = operand_a;
     PASSB: expected_result = operand_b;
     ADD: expected_result = operand_a + operand_b;
     SUB: expected_result = operand_a - operand_b;
-    MOD: expected_result = operand_a % operand_b;
+    MOD:
+       if(operand_b == 'b0)begin
+          expected_result = 'b0;
+        end 
+        else begin
+           expected_result = operand_a % operand_b;
+        end  
     MULT: expected_result = operand_a * operand_b;
-    DIV:  expected_result = operand_a / operand_b;
+    DIV:
+        if(operand_b == 'b0)begin
+          expected_result = 'b0;
+        end 
+        else begin
+           expected_result = operand_a / operand_b;
+        end
     ZERO: expected_result = 'b0;
   endcase
   iw_reg_test[write_pointer] = '{opcode, operand_a , operand_b, expected_result};
@@ -138,36 +159,26 @@ module instr_register_test
   function void final_report;
     $display("\n Failed test: %0d", fail_counter);
     $display("\n Passed test: %0d", passed_counter);
-    $display("\n Passed test %0d out of %0d", passed_counter, WR_NR + 1);
-    // va trebui sa am un fopen(../report/..)
-    //
+    $display("\n Passed test %0d out of %0d", passed_counter, tests);
   endfunction
   function void check_result;
-      //  foreach(iw_reg_test[read_pointer])begin
-      // case(iw_reg_test[read_pointer].opc)
-      //       PASSA: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a;
-
-      //       PASSB: expected_result[read_pointer] = iw_reg_test[read_pointer].op_b;
-
-      //       ADD: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a + iw_reg_test[read_pointer].op_b;
-
-      //       SUB: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a - iw_reg_test[read_pointer].op_b;
-
-      //       MULT: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a * iw_reg_test[read_pointer].op_b;
-
-      //       DIV: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;
-      //       MOD: expected_result[read_pointer] = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
-
-      //       ZERO: expected_result[read_pointer] = 'b0;
-      // endcase
-        if(expected_result[read_pointer] != instruction_word.rezultat)begin
+        if(iw_reg_test[read_pointer].rezultat !== instruction_word.rezultat)begin
           fail_counter++;
-          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n",read_pointer , iw_reg_test[read_pointer].opc, iw_reg_test[read_pointer].opc.name, iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, expected_result[read_pointer],iw_reg_test[read_pointer].rezultat);
+          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n Failed \n",read_pointer , iw_reg_test[read_pointer].opc, iw_reg_test[read_pointer].opc.name, iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, iw_reg_test[read_pointer].rezultat,instruction_word.rezultat);
         end 
         else begin
+          $display("\n Iteration = %0d \n: opcode = %0d (%s)  \noperand_a = %0d \n operand_b = %0d \n expected result = %0d  \n actual result = %0d \n Passed \n",read_pointer , iw_reg_test[read_pointer].opc, iw_reg_test[read_pointer].opc.name, iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, iw_reg_test[read_pointer].rezultat,instruction_word.rezultat);
           passed_counter++;
         end
-    //end
+        tests++;
   endfunction: check_result
+  function void write_regression_status;
+      int fd;
 
+      fd = $fopen("../reports/regression_transcript/regression_status.txt", "a");
+      if(fd) $display("File openned successfully");
+      else $display("File failed to open");
+      if(fail_counter !=0) $fdisplay(fd, "%s : failed", CASE_NAME);
+      else $fdisplay(fd, "%s : passed", CASE_NAME);
+  endfunction
 endmodule: instr_register_test
